@@ -3,7 +3,11 @@ module LaTeXChanges
 
 export apply_changes
 
+"""
+    apply_changes(input_file, output_file = input_file)
 
+Read the `input_file`, apply the changes from the [LaTeX changes](https://ctan.org/pkg/changes) package and write the result to `output_file`.
+"""
 function apply_changes(input_file, output_file = input_file)
     str_in = join(readlines(input_file), '\n')
     str_clean = _apply_changes(str_in)

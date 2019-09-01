@@ -6,7 +6,7 @@
 [![Coveralls](https://coveralls.io/repos/github/daschw/LaTeXChanges.jl/badge.svg?branch=master)](https://coveralls.io/github/daschw/LaTeXChanges.jl?branch=master)
 [![Build Status](https://api.cirrus-ci.com/github/daschw/LaTeXChanges.jl.svg)](https://cirrus-ci.com/github/daschw/LaTeXChanges.jl)
 
-The [changes](https://ctan.org/pkg/changes) packages can be used to highlight modifications in a LaTeX manuscript using `\added{}`, `\deleted{}`, and `\replaced{}{}`.
+The [LaTeX changes](https://ctan.org/pkg/changes) packages can be used to highlight modifications in a LaTeX manuscript using `\added{}`, `\deleted{}`, and `\replaced{}{}`.
 This Julia package provides a small function to apply all the changes in a LaTeX file and generate a clean final source.
 
 ## Install
