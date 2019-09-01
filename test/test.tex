@@ -1,0 +1,10 @@
+Julia is \deleted{one of} my favourite programming language\deleted{s}.
+We want to test \LaTeX files \added{also containing {\textit curved brackets}.}
+Some changes \replaced{might even wrap around multiple lines.
+This should be tested as well}{can be ignored}.
+We should also include equations, so lets add replace one defintion of Euler's constant $e$ by another.
+\replaced{\begin{align}
+e = \sum_{k = 0}^{\infty} \frac{1}{k!}
+\end{align}}{\begin{align}
+e = \lim\limits_{n \to \infty } \left( {1 + \frac{1}{n}} \right)^n
+\end{align}}
