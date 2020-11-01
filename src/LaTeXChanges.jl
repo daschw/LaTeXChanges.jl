@@ -18,11 +18,11 @@ end
 
 
 function _apply_changes(str)
-    @info "Applying \\added{}"
+    @info "Applying \\added[]{}"
     str = apply_added(str)
-    @info "Applying \\deleted{}"
+    @info "Applying \\deleted[]{}"
     str = apply_deleted(str)
-    @info "Applying \\replaced{}{}"
+    @info "Applying \\replaced[]{}{}"
     str = apply_replaced(str)
 end
 
@@ -32,7 +32,7 @@ function apply_added(str)
     inds = findfirst(r"\\added", str)
 
     while inds !== nothing
-        i_open = nextind(str, last(inds))
+        i_open = opening_index(str, nextind(str, last(inds)))
         i_close = closing_index(str, nextind(str, i_open))
 
         before = str[firstindex(str):prevind(str, first(inds))]
@@ -55,7 +55,7 @@ function apply_deleted(str)
     inds = findfirst(r"\\deleted", str)
 
     while inds !== nothing
-        i_open = nextind(str, last(inds))
+        i_open = opening_index(str, nextind(str, last(inds)))
         i_close = closing_index(str, nextind(str, i_open))
 
         before = str[firstindex(str):prevind(str, first(inds))]
@@ -77,7 +77,7 @@ function apply_replaced(str)
     inds = findfirst(r"\\replaced", str)
 
     while inds !== nothing
-        i_open_add = nextind(str, last(inds))
+        i_open_add = opening_index(str, nextind(str, last(inds)))
         i_close_add = closing_index(str, nextind(str, i_open_add))
 
         i_open_del = nextind(str, i_close_add)
@@ -97,6 +97,22 @@ function apply_replaced(str)
 end
 
 
+function opening_index(str, i = firstindex(str))
+    n = 0
+    while i <= lastindex(str)
+        if str[i] == '['
+            n += 1
+        elseif str[i] == ']' && n > 0
+            n -= 1
+        elseif str[i] == '{' && n == 0
+            return i
+        end
+        i = nextind(str, i)
+    end
+    error("No opening index found in `str`.")
+end
+
+
 function closing_index(str, i = firstindex(str))
     n = 0
     lastind = lastindex(str)
@@ -112,7 +128,7 @@ function closing_index(str, i = firstindex(str))
         end
         i = nextind(str, i)
     end
-    return 0
+    error("No closing index found in `str`.")
 end
 
 
